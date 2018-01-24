@@ -163,7 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getReadableDatabase();
             db.execSQL(deleteQuery);
             db.close();
-            return true;
+            return true; //generic comment to test GitHub
         }
         catch(SQLException e)
         {
