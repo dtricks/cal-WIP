@@ -123,7 +123,29 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.close();
         return list;
     }
+    public List<List<String>> getFood_PseudoObject() {
+        List<List<String>> list_of_lists = new ArrayList<List<String>>();
+        String selectQuery = "SELECT * FROM " + TABLE2_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()){
+            do{
+                List<String> list = new ArrayList<String>();
+                list.add(cursor.getString(3));
+                list.add(cursor.getString(4));
+                list.add(cursor.getString(2));
+                list.add(cursor.getString(1));
+                //legacy: list.add(cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(1) + " (" + cursor.getString(2) + " kcal)");
+                list_of_lists.add(list);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return list_of_lists;
+    }
+//legacy
     public List<String> getFood() {
+        List<List<String>> list_of_lists = new ArrayList<List<String>>();
         List<String> list = new ArrayList<String>();
         String selectQuery = "SELECT * FROM " + TABLE2_NAME;
         SQLiteDatabase db = this.getReadableDatabase();

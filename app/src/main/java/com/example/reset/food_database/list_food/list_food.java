@@ -1,5 +1,6 @@
 package com.example.reset.food_database.list_food;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.app.AlertDialog;
 import com.example.reset.food_database.DatabaseHandler;
 import com.example.reset.food_database.R;
 import com.example.reset.food_database.add_food.activity_add_food;
+import com.example.reset.food_database.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,10 @@ public class list_food extends AppCompatActivity {
     Button addFood;
     ListView list;
     SearchView searchBar;
+
+
+    DatabaseHandler database= new DatabaseHandler(list_food.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,11 @@ public class list_food extends AppCompatActivity {
                             {
                                 Toast.makeText(getApplicationContext(), "TEST1", Toast.LENGTH_SHORT).show();
                                 //dialog.cancel();
+
+
+                                //TODO find out how to get Food from the database
+                                List<List<String>> allFood=database.getFood_PseudoObject();
+                                util.showMessage("database", allFood.toString(), list_food.this); //context is the problem here
                             }
                         });
 
