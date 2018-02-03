@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.reset.food_database.activity_add_food">
+    tools:context="com.example.reset.food_database.add_food.activity_add_food">
 
     <TextView
         android:layout_alignParentStart="true"
