@@ -34,7 +34,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE3_ID = "id";
     private static final String TABLE3_COLUMN_FOOD = "foodname";
     private static final String TABLE3_COLUMN_KCAL = "kcal";
+    private static final String TABLE3_COLUMN_PORTION = "portion";
     private static final String TABLE3_COLUMN_DATE = "date";
+    private static final boolean TABLE3_COLUMN_FOODORRECIPE = true; //true=food, false=recipe
 
     //Datenbanktabelle für Rezepte
     private static final String TABLE4_NAME = "Recipes";
@@ -47,6 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE5_ID = "id";
     private static final String TABLE5_RECIPEID = "recipeid";
     private static final String TABLE5_COLUMN_FOOD = "food";
+    private static final String TABLE5_COLUMN_FOODKCAL = "foodkcal";
     private static final String TABLE5_COLUMN_QUANTITY = "quantity";
 
     //Datenbanktabelle für Settings
