@@ -10,12 +10,17 @@
     <SearchView
         android:id="@+id/foodfilter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-    <ListView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/foodlist" />
+        android:text="Button" />
+
+    <ListView
+        android:id="@+id/foodlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/addfood"

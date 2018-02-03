@@ -36,6 +36,26 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE3_COLUMN_KCAL = "kcal";
     private static final String TABLE3_COLUMN_DATE = "date";
 
+    //Datenbanktabelle für Rezepte
+    private static final String TABLE4_NAME = "Recipes";
+    private static final String TABLE4_ID = "id";
+    private static final String TABLE4_COLUMN_RECIPE = "recipename";
+    private static final String TABLE4_COLUMN_KCAL = "recipekcal";
+
+    //Datenbanktabelle Rezeptinhalte
+    private static final String TABLE5_NAME = "Recipeingredients";
+    private static final String TABLE5_ID = "id";
+    private static final String TABLE5_RECIPEID = "recipeid";
+    private static final String TABLE5_COLUMN_FOOD = "food";
+    private static final String TABLE5_COLUMN_QUANTITY = "quantity";
+
+    //Datenbanktabelle für Settings
+    private static final String TABLE6_NAME = "SETTINGS";
+    private static final String TABLE6_ID = "id";
+    private static final String TABLE6_MAXKCAL = "maxkcal";
+
+    //
+
     public DatabaseHandler(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
