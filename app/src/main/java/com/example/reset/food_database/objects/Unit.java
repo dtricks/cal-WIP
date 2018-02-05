@@ -7,6 +7,7 @@ package com.example.reset.food_database.objects;
 public class Unit {
 
     private String name;
+    private int id;
 
     public String getName() {
         return name;
@@ -16,7 +17,8 @@ public class Unit {
         this.name = name;
     }
 
-    public Unit(String name){
+    public Unit(int id, String name){
+        this.id=id;
         this.name=name;
     }
 

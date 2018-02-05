@@ -80,11 +80,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL(CREATE_ITEM_TABLE);
 
         //create Table food
-        String CREATE_PHASES_TABLE2 = "CREATE TABLE " + FOOD_NAME + "("
+        String CREAT_FOOD_TABLE = "CREATE TABLE " + FOOD_NAME + "("
                 + FOOD_ID + " INTEGER PRIMARY KEY," + FOOD_COLUMN_NAME
                 + " TEXT," + FOOD_COLUMN_KCAL + " INTEGER," + FOOD_COLUMN_QUANTITY
-                + " INTEGER," + FOOD_COLUMN_UNIT + " TEXT)"; //TODO Oli double quantity
-        db.execSQL(CREATE_PHASES_TABLE2);
+                + " DOUBLE," + FOOD_COLUMN_UNIT + " TEXT)";
+        db.execSQL(CREAT_FOOD_TABLE);
 
 
 

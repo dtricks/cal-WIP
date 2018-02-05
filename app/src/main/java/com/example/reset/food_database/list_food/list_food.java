@@ -65,10 +65,9 @@ public class list_food extends AppCompatActivity {
                         {
                             public void onClick(DialogInterface dialog, int id)
                             {
-                                //Toast.makeText(getApplicationContext(), "TEST1", Toast.LENGTH_SHORT).show();
                                 //dialog.cancel();
 
-                                Food food=database.getFood_new(0);
+                                Food food=database.getFood_new(1);
 
                                 Toast.makeText(getApplicationContext(), food.toString(), Toast.LENGTH_LONG).show();
 
