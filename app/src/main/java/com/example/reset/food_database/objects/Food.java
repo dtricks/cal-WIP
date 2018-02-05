@@ -1,5 +1,8 @@
 package com.example.reset.food_database.objects;
 
+import com.example.reset.food_database.DatabaseHandler;
+import com.example.reset.food_database.add_unit.activity_add_unit;
+
 /**
  * Created by C4RL0zZ0 on 05.02.2018.
  */
@@ -30,11 +33,13 @@ public class Food {
 
     @Override
     public String toString() {
+
         return "Food{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                " ,name='" + name + '\'' +
                 ", kcal=" + kcal +
                 ", quantity=" + quantity +
-                ", unit=" + unit +
+                ", unit=" + unit.getId() +
                 '}';
     }
 

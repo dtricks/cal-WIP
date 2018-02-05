@@ -115,7 +115,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL(insertSQL);
     }
 
-    public void insertFood(String name, int kcal, int quantity, String unit) {
+    public void insertFood(String name, int kcal, int quantity, int unit) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String insertSQL = "INSERT INTO " + FOOD_NAME + " (" + FOOD_COLUMN_NAME
@@ -139,6 +139,25 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.close();
         return list;
     }
+
+    public List<Unit> getUnits_new() {
+        List<Unit> list = new ArrayList<Unit>();
+        String selectQuery = "SELECT * FROM " + UNIT_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()){
+            do{
+                Unit unit = new Unit();
+                unit.setId(cursor.getInt(0));
+                unit.setName(cursor.getString(1));
+                list.add(unit);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
+
 
     public Food getFood_new(int id) {
         Food food=new Food();
@@ -259,14 +278,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     }
 
 
-    public boolean deleteFood(String name, String kcal, String quantity, String unit){
+    public boolean deleteFood(int foodID){
 
         try{
         String deleteQuery = "DELETE FROM " + FOOD_NAME + " WHERE " +
-                 FOOD_COLUMN_NAME + " = " + "'" + name + "' AND " +
-                 FOOD_COLUMN_KCAL + " = " + "'" + kcal + "' AND " +
-                 FOOD_COLUMN_QUANTITY + " = " + "'" + quantity + "' AND " +
-                 FOOD_COLUMN_UNIT + " = " + "'" + unit + "'";
+                FOOD_ID + " = " + "'" + foodID + "'";
         SQLiteDatabase db = this.getReadableDatabase();
             db.execSQL(deleteQuery);
             db.close();

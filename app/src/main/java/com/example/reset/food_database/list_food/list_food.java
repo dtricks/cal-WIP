@@ -31,6 +31,7 @@ public class list_food extends AppCompatActivity {
     ListView list;
     SearchView searchBar;
 
+    List<Food> foodList = new ArrayList<Food>();
 
     DatabaseHandler database= new DatabaseHandler(list_food.this);
 
@@ -54,7 +55,10 @@ public class list_food extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String selectedItem = (String) parent.getItemAtPosition(position);
+               final String selectedItem = (String) parent.getItemAtPosition(position);
+
+                final int selectedItemId = (int) parent.getItemIdAtPosition(position);
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(list_food.this);
                 builder.setTitle("Was möchten Sie mit tun?");
@@ -67,7 +71,10 @@ public class list_food extends AppCompatActivity {
                             {
                                 //dialog.cancel();
 
-                                Food food=database.getFood_new(1);
+                                int foodID = foodList.get(selectedItemId).getId();
+                           //     Food food=database.getFood_new(foodID);
+
+                                Food food = foodList.get(selectedItemId);
 
                                 Toast.makeText(getApplicationContext(), food.toString(), Toast.LENGTH_LONG).show();
 
@@ -94,18 +101,13 @@ public class list_food extends AppCompatActivity {
                         {
                             public void onClick(DialogInterface dialog, int id)
                             {
-                                String str = selectedItem;
-                                String[] splited = str.split("\\s+");
-                                String quantity = splited[0];
-                                String unit = splited[1];
-                                String name = splited[2];
-                                String kcal = splited[3].substring(1);
-                                Toast.makeText(getApplicationContext(), quantity + unit + name + kcal, Toast.LENGTH_SHORT).show();
+                                int foodID = foodList.get(selectedItemId).getId();
+
 
                                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
-                                if(db.deleteFood(name, kcal, quantity, unit)){
-                                    Toast.makeText(getApplicationContext(), name + " wurde gelöscht!", Toast.LENGTH_SHORT).show();
+                                if(db.deleteFood(foodID)){
+                                    Toast.makeText(getApplicationContext(), foodList.get(selectedItemId).getName() + " wurde gelöscht!", Toast.LENGTH_SHORT).show();
                                     fillList(list);
                                 }
                                 else{
@@ -155,10 +157,15 @@ public class list_food extends AppCompatActivity {
     private void fillList(ListView list) {
 
         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-        List<String> foodList = new ArrayList<String>();
-        foodList = db.getFood();
+        foodList = db.getFoodList();
+        List<String> foodAdapter = new ArrayList<String>();
+
+        for (Food object: foodList) {
+            foodAdapter.add(object.getQuantity() + " " + object.getUnit().getName() + " " + object.getName() + " ");
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, foodList);
+                this, android.R.layout.simple_list_item_1, foodAdapter);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         list.setAdapter(adapter);
     }
