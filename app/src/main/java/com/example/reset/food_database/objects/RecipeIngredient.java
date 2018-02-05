@@ -5,4 +5,13 @@ package com.example.reset.food_database.objects;
  */
 
 public class RecipeIngredient {
+
+    private int id;
+   // private Recipe recipe;
+    private Food food;
+    private double quantity;
+
+
+    public RecipeIngredient() {
+    }
 }

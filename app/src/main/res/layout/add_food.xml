@@ -93,5 +93,6 @@
         android:text="Submit Food"
         android:layout_margin="20dp"/>
 
+    <include layout="@layout/footer"/>
 
 </RelativeLayout>

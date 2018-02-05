@@ -33,4 +33,6 @@
         android:text="Submit Unit"
         android:layout_margin="20dp"/>
 
+    <include layout="@layout/footer"/>
+
 </RelativeLayout>

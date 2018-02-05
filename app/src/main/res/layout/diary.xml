@@ -29,4 +29,6 @@
         android:layout_marginHorizontal="20dp"
         android:text="Add Food" />
 
+    <include layout="@layout/footer_diary"/>
+
 </LinearLayout>
