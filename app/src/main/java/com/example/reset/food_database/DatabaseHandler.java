@@ -76,22 +76,20 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db){
         //create Table unit
-        String CREATE_ITEM_TABLE = "CREATE TABLE " + UNIT_NAME + "(" + UNIT_COLUMN_ID + " INTEGER PRIMARY KEY," + UNIT_COLUMN_NAME + " TEXT)";
-        db.execSQL(CREATE_ITEM_TABLE);
+        String CREATE_UNIT = "CREATE TABLE " + UNIT_NAME + "(" + UNIT_COLUMN_ID + " INTEGER PRIMARY KEY," + UNIT_COLUMN_NAME + " TEXT)";
+        db.execSQL(CREATE_UNIT);
 
         //create Table food
-        String CREAT_FOOD_TABLE = "CREATE TABLE " + FOOD_NAME + "("
+        String CREATE_FOOD_TABLE = "CREATE TABLE " + FOOD_NAME + "("
                 + FOOD_ID + " INTEGER PRIMARY KEY," + FOOD_COLUMN_NAME
                 + " TEXT," + FOOD_COLUMN_KCAL + " INTEGER," + FOOD_COLUMN_QUANTITY
                 + " DOUBLE," + FOOD_COLUMN_UNIT + " TEXT)";
-        db.execSQL(CREAT_FOOD_TABLE);
-
-
-
+        db.execSQL(CREATE_FOOD_TABLE);
 
         //create Table diaryEntry
-        //TODO Oli
+
         //create Table diary
+
         //create Table settings
 
         //Insert default units
@@ -149,18 +147,36 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery(selectQuery, null);
         if(cursor.getColumnIndex(FOOD_ID)==id){
             do{
-                //food.setId(cursor.getInt(0));
+                food.setId(cursor.getInt(0));
                 food.setName(cursor.getString(1));
                 food.setKcal(cursor.getInt(2));
                 food.setQuantity(cursor.getDouble(3));
-                Unit unit= new Unit(cursor.getString(4));
-                food.setUnit(unit);
+                food.setUnit(getUnit_new(cursor.getInt(4)));
                 //list.add(cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(1) + " (" + cursor.getString(2) + " kcal)");
             }while(cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return food;
+    }
+
+
+    public Unit getUnit_new(int id) {
+        Unit unit = new Unit();
+        String selectQuery = "SELECT * FROM " + FOOD_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.getColumnIndex(UNIT_COLUMN_ID)==id){
+            do{
+                //food.setId(cursor.getInt(0));
+                unit.setId(cursor.getInt(0));
+                unit.setName(cursor.getString(1));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return unit;
     }
 
     public List<String> getFood() {
@@ -172,6 +188,30 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             do{
 
                 list.add(cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(1) + " (" + cursor.getString(2) + " kcal)");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
+
+
+
+    public List<Food> getFoodList() {
+        List<Food> list = new ArrayList<Food>();
+        String selectQuery = "SELECT * FROM " + FOOD_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Food food = new Food();
+                food.setId(cursor.getInt(0));
+                food.setName(cursor.getString(1));
+                food.setKcal(cursor.getInt(2));
+                food.setQuantity(cursor.getDouble(3));
+                food.setUnit(getUnit_new(cursor.getInt(4)));
+                list.add(food);
             }while(cursor.moveToNext());
         }
         cursor.close();
