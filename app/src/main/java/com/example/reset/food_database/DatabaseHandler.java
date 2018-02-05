@@ -156,6 +156,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         return list;
     }
 
+
+    //returns all Units as a list
     public List<Unit> getUnits_new() {
         List<Unit> list = new ArrayList<Unit>();
         String selectQuery = "SELECT * FROM " + UNIT_NAME;

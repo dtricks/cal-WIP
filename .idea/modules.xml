@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Food_Database.iml" filepath="$PROJECT_DIR$/Food_Database.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Reset\Documents\Android Projects\Neuer Ordner\Food_Database\cal-WIP.iml" filepath="C:\Users\Reset\Documents\Android Projects\Neuer Ordner\Food_Database\cal-WIP.iml" />
     </modules>
   </component>
 </project>
