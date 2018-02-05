@@ -9,25 +9,31 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.example.reset.food_database.objects.Food;
+import com.example.reset.food_database.objects.Unit;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper{
 
 
-    //Datenbanktabellen für Einheiten
+    //Datenbankerstellung
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FoodDiary";
-    private static final String TABLE_NAME = "Unit";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_NAME1 = "Unit";
 
-    //Datenbanktabelle für Lebensmittel
-    private static final String TABLE2_NAME = "Food";
-    private static final String TABLE2_ID = "id";
-    private static final String TABLE2_COLUMN_NAME = "foodname";
-    private static final String TABLE2_COLUMN_KCAL = "kcal";
-    private static final String TABLE2_COLUMN_QUANTITY = "quantity";
-    private static final String TABLE2_COLUMN_UNIT = "unit";
+    //Datenbanktabellen für Einheiten
+    private static final String UNIT_NAME = "Unit";
+    private static final String UNIT_COLUMN_ID = "id";
+    private static final String UNIT_COLUMN_NAME = "Unit";
+
+    //Datenbanktabelle für Food
+    private static final String FOOD_NAME = "Food";
+    private static final String FOOD_ID = "id";
+    private static final String FOOD_COLUMN_NAME = "foodname";
+    private static final String FOOD_COLUMN_KCAL = "kcal";
+    private static final String FOOD_COLUMN_QUANTITY = "quantity";
+    private static final String FOOD_COLUMN_UNIT = "unit";
 
     //Datenbanktabelle für das Tagebuch
     private static final String TABLE3_NAME = "Diary";
@@ -36,7 +42,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE3_COLUMN_KCAL = "kcal";
     private static final String TABLE3_COLUMN_PORTION = "portion";
     private static final String TABLE3_COLUMN_DATE = "date";
-    private static final boolean TABLE3_COLUMN_FOODORRECIPE = true; //true=food, false=recipe
+    private static final String TABLE3_COLUMN_FOODORRECIPE = "isRecipe"; //true=food, false=recipe
 
     //Datenbanktabelle für Rezepte
     private static final String TABLE4_NAME = "Recipes";
@@ -48,6 +54,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE5_NAME = "Recipeingredients";
     private static final String TABLE5_ID = "id";
     private static final String TABLE5_RECIPEID = "recipeid";
+    private static final String TABLE5_FOODID = "foodid";
     private static final String TABLE5_COLUMN_FOOD = "food";
     private static final String TABLE5_COLUMN_FOODKCAL = "foodkcal";
     private static final String TABLE5_COLUMN_QUANTITY = "quantity";
@@ -68,15 +75,26 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        String CREATE_ITEM_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_NAME1 + " TEXT)";
+        //create Table unit
+        String CREATE_ITEM_TABLE = "CREATE TABLE " + UNIT_NAME + "(" + UNIT_COLUMN_ID + " INTEGER PRIMARY KEY," + UNIT_COLUMN_NAME + " TEXT)";
         db.execSQL(CREATE_ITEM_TABLE);
 
-        String CREATE_PHASES_TABLE2 = "CREATE TABLE " + TABLE2_NAME + "("
-                + TABLE2_ID + " INTEGER PRIMARY KEY," + TABLE2_COLUMN_NAME
-                + " TEXT," + TABLE2_COLUMN_KCAL + " INTEGER," + TABLE2_COLUMN_QUANTITY
-                + " INTEGER," + TABLE2_COLUMN_UNIT + " TEXT)";
+        //create Table food
+        String CREATE_PHASES_TABLE2 = "CREATE TABLE " + FOOD_NAME + "("
+                + FOOD_ID + " INTEGER PRIMARY KEY," + FOOD_COLUMN_NAME
+                + " TEXT," + FOOD_COLUMN_KCAL + " INTEGER," + FOOD_COLUMN_QUANTITY
+                + " INTEGER," + FOOD_COLUMN_UNIT + " TEXT)"; //TODO Oli double quantity
         db.execSQL(CREATE_PHASES_TABLE2);
 
+
+
+
+        //create Table diaryEntry
+        //TODO Oli
+        //create Table diary
+        //create Table settings
+
+        //Insert default units
         insertUnit(db, "g");
         insertUnit(db, "EL");
         insertUnit(db,"TL");
@@ -88,22 +106,22 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
 
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE2_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + UNIT_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FOOD_NAME);
 
         onCreate(db);
     }
 
     public void insertUnit(SQLiteDatabase db, String unit){
-        String insertSQL = "INSERT INTO " + TABLE_NAME + " ("+COLUMN_NAME1+") VALUES ('"+unit+"')";
+        String insertSQL = "INSERT INTO " + UNIT_NAME + " ("+UNIT_COLUMN_NAME+") VALUES ('"+unit+"')";
         db.execSQL(insertSQL);
     }
 
     public void insertFood(String name, int kcal, int quantity, String unit) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String insertSQL = "INSERT INTO " + TABLE2_NAME + " (" + TABLE2_COLUMN_NAME
-                + ", " + TABLE2_COLUMN_KCAL + ", " + TABLE2_COLUMN_QUANTITY + ", " + TABLE2_COLUMN_UNIT + ") " +
+        String insertSQL = "INSERT INTO " + FOOD_NAME + " (" + FOOD_COLUMN_NAME
+                + ", " + FOOD_COLUMN_KCAL + ", " + FOOD_COLUMN_QUANTITY + ", " + FOOD_COLUMN_UNIT + ") " +
                 "VALUES ('" + name + "', " + kcal + ", " + quantity + ", '" + unit + "')";
 
             db.execSQL(insertSQL);
@@ -111,7 +129,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     public List<String> getUnits() {
         List<String> list = new ArrayList<String>();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + UNIT_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if(cursor.moveToFirst()){
@@ -123,35 +141,36 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.close();
         return list;
     }
-    public List<List<String>> getFood_PseudoObject() {
-        List<List<String>> list_of_lists = new ArrayList<List<String>>();
-        String selectQuery = "SELECT * FROM " + TABLE2_NAME;
+
+    public Food getFood_new(int id) {
+        Food food=new Food();
+        String selectQuery = "SELECT * FROM " + FOOD_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor.moveToFirst()){
+        if(cursor.getColumnIndex(FOOD_ID)==id){
             do{
-                List<String> list = new ArrayList<String>();
-                list.add(cursor.getString(3));
-                list.add(cursor.getString(4));
-                list.add(cursor.getString(2));
-                list.add(cursor.getString(1));
-                //legacy: list.add(cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(1) + " (" + cursor.getString(2) + " kcal)");
-                list_of_lists.add(list);
+                //food.setId(cursor.getInt(0));
+                food.setName(cursor.getString(1));
+                food.setKcal(cursor.getInt(2));
+                food.setQuantity(cursor.getDouble(3));
+                Unit unit= new Unit(cursor.getString(4));
+                food.setUnit(unit);
+                //list.add(cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(1) + " (" + cursor.getString(2) + " kcal)");
             }while(cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return list_of_lists;
+        return food;
     }
-//legacy
+
     public List<String> getFood() {
-        List<List<String>> list_of_lists = new ArrayList<List<String>>();
         List<String> list = new ArrayList<String>();
-        String selectQuery = "SELECT * FROM " + TABLE2_NAME;
+        String selectQuery = "SELECT * FROM " + FOOD_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if(cursor.moveToFirst()){
             do{
+
                 list.add(cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(1) + " (" + cursor.getString(2) + " kcal)");
             }while(cursor.moveToNext());
         }
@@ -160,11 +179,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         return list;
     }
 
+
+
+
     public boolean doesUnitExist(String unit) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM " + TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + UNIT_NAME;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
@@ -182,8 +204,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public boolean deleteUnit(String unit) {
 
         try{
-            String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE "
-                    + COLUMN_NAME1 + " = " + "'" + unit + "'";
+            String deleteQuery = "DELETE FROM " + UNIT_NAME + " WHERE "
+                    + UNIT_COLUMN_NAME + " = " + "'" + unit + "'";
             SQLiteDatabase db = this.getReadableDatabase();
             db.execSQL(deleteQuery);
             db.close();
@@ -200,11 +222,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public boolean deleteFood(String name, String kcal, String quantity, String unit){
 
         try{
-        String deleteQuery = "DELETE FROM " + TABLE2_NAME + " WHERE " +
-                 TABLE2_COLUMN_NAME + " = " + "'" + name + "' AND " +
-                 TABLE2_COLUMN_KCAL + " = " + "'" + kcal + "' AND " +
-                 TABLE2_COLUMN_QUANTITY + " = " + "'" + quantity + "' AND " +
-                 TABLE2_COLUMN_UNIT + " = " + "'" + unit + "'";
+        String deleteQuery = "DELETE FROM " + FOOD_NAME + " WHERE " +
+                 FOOD_COLUMN_NAME + " = " + "'" + name + "' AND " +
+                 FOOD_COLUMN_KCAL + " = " + "'" + kcal + "' AND " +
+                 FOOD_COLUMN_QUANTITY + " = " + "'" + quantity + "' AND " +
+                 FOOD_COLUMN_UNIT + " = " + "'" + unit + "'";
         SQLiteDatabase db = this.getReadableDatabase();
             db.execSQL(deleteQuery);
             db.close();

@@ -19,7 +19,8 @@ import android.app.AlertDialog;
 import com.example.reset.food_database.DatabaseHandler;
 import com.example.reset.food_database.R;
 import com.example.reset.food_database.add_food.activity_add_food;
-import com.example.reset.food_database.util;
+import com.example.reset.food_database.objects.Food;
+//import com.example.reset.food_database.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,13 +65,17 @@ public class list_food extends AppCompatActivity {
                         {
                             public void onClick(DialogInterface dialog, int id)
                             {
-                                Toast.makeText(getApplicationContext(), "TEST1", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "TEST1", Toast.LENGTH_SHORT).show();
                                 //dialog.cancel();
+
+                                Food food=database.getFood_new(0);
+
+                                Toast.makeText(getApplicationContext(), food.toString(), Toast.LENGTH_LONG).show();
 
 
                                 //TODO find out how to get Food from the database
-                                List<List<String>> allFood=database.getFood_PseudoObject();
-                                util.showMessage("database", allFood.toString(), list_food.this); //context is the problem here
+                                //List<List<String>> allFood=database.getFood_PseudoObject();
+                               // util.showMessage("database", allFood.toString(), list_food.this); //context is the problem here
                             }
                         });
 
