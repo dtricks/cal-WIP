@@ -122,5 +122,6 @@
         android:text="@string/addtodiary_buttontext"
         android:layout_margin="20dp"/>
 
+    <include layout="@layout/footer"/>
 
 </LinearLayout>

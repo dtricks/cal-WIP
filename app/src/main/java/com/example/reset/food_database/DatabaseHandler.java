@@ -18,16 +18,16 @@ import com.example.reset.food_database.objects.Unit;
 public class DatabaseHandler extends SQLiteOpenHelper{
 
 
-    //Datenbankerstellung
+    //creating database
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FoodDiary";
 
-    //Datenbanktabellen für Einheiten
+    //databasetable for  Units
     private static final String UNIT_NAME = "Unit";
     private static final String UNIT_COLUMN_ID = "id";
     private static final String UNIT_COLUMN_NAME = "Unit";
 
-    //Datenbanktabelle für Food
+    //databasetable for  Food
     private static final String FOOD_NAME = "Food";
     private static final String FOOD_ID = "id";
     private static final String FOOD_COLUMN_NAME = "foodname";
@@ -35,34 +35,32 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String FOOD_COLUMN_QUANTITY = "quantity";
     private static final String FOOD_COLUMN_UNIT = "unit";
 
-    //Datenbanktabelle für das Tagebuch
-    private static final String TABLE3_NAME = "Diary";
-    private static final String TABLE3_ID = "id";
-    private static final String TABLE3_COLUMN_FOOD = "foodname";
-    private static final String TABLE3_COLUMN_KCAL = "kcal";
-    private static final String TABLE3_COLUMN_PORTION = "portion";
-    private static final String TABLE3_COLUMN_DATE = "date";
-    private static final String TABLE3_COLUMN_FOODORRECIPE = "isRecipe"; //true=food, false=recipe
+    //databasetable for  Diary
+    private static final String DIARYENTRY_NAME = "Diary";
+    private static final String DIARYENTRY_ID = "id";
+    private static final String DIARYENTRY_COLUMN_FOOD = "foodname";
+    private static final String DIARYENTRY_COLUMN_KCAL = "kcal";
+    private static final String DIARYENTRY_COLUMN_PORTION = "portion";
+    private static final String DIARYENTRY_COLUMN_DATE = "date";
+    private static final String DIARYENTRY_COLUMN_UNIT = "unit";
 
-    //Datenbanktabelle für Rezepte
-    private static final String TABLE4_NAME = "Recipes";
-    private static final String TABLE4_ID = "id";
-    private static final String TABLE4_COLUMN_RECIPE = "recipename";
-    private static final String TABLE4_COLUMN_KCAL = "recipekcal";
+    //databasetable for  Recipe
+    private static final String RECIPE_NAME = "Recipes";
+    private static final String RECIPE_ID = "id";
+    private static final String RECIPE_COLUMN_RECIPE = "recipename";
+    private static final String RECIPE_COLUMN_KCAL = "recipekcal";
 
-    //Datenbanktabelle Rezeptinhalte
-    private static final String TABLE5_NAME = "Recipeingredients";
-    private static final String TABLE5_ID = "id";
-    private static final String TABLE5_RECIPEID = "recipeid";
-    private static final String TABLE5_FOODID = "foodid";
-    private static final String TABLE5_COLUMN_FOOD = "food";
-    private static final String TABLE5_COLUMN_FOODKCAL = "foodkcal";
-    private static final String TABLE5_COLUMN_QUANTITY = "quantity";
+    //databasetable for  Recipeingredients
+    private static final String RECIPEINGREDIENTS_NAME = "Recipeingredients";
+    private static final String RECIPEINGREDIENTS_ID = "id";
+    private static final String RECIPEINGREDIENTS_RECIPEID = "recipeid";
+    private static final String RECIPEINGREDIENTS_FOODID = "foodid";
+    private static final String RECIPEINGREDIENTS_COLUMN_QUANTITY = "quantity";
 
-    //Datenbanktabelle für Settings
-    private static final String TABLE6_NAME = "SETTINGS";
-    private static final String TABLE6_ID = "id";
-    private static final String TABLE6_MAXKCAL = "maxkcal";
+    //databasetable for Settings
+    private static final String SETTINGS_NAME = "SETTINGS";
+    private static final String SETTINGS_ID = "id";
+    private static final String SETTINGS_MAXKCAL = "maxkcal";
 
     //
 
@@ -87,10 +85,28 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL(CREATE_FOOD_TABLE);
 
         //create Table diaryEntry
+        String CREATE_DIARYENTRY_TABLE = "CREATE TABLE " + DIARYENTRY_NAME + "("
+                + DIARYENTRY_ID + " INTEGER PRIMARY KEY," + DIARYENTRY_COLUMN_FOOD + " TEXT,"
+                + DIARYENTRY_COLUMN_KCAL + " INTEGER," + DIARYENTRY_COLUMN_PORTION + " DOUBLE,"
+                + DIARYENTRY_COLUMN_DATE + " DATE," + DIARYENTRY_COLUMN_UNIT + " TEXT)";
+        db.execSQL(CREATE_DIARYENTRY_TABLE);
 
-        //create Table diary
+        //create Table recipe
+        String CREATE_RECIPE_TABLE = "CREATE TABLE " + RECIPE_NAME + "("
+                + RECIPE_ID + " INTEGER PRIMARY KEY," + RECIPE_COLUMN_RECIPE + " TEXT,"
+                + RECIPE_COLUMN_KCAL + " INTEGER)";
+        db.execSQL(CREATE_RECIPE_TABLE);
+
+        //create Table recipeingredients
+        String CREATE_RECIPEINGREDIENTS_TABLE = "CREATE TABLE " + RECIPEINGREDIENTS_NAME + "("
+                + RECIPEINGREDIENTS_ID + " INTEGER PRIMARY KEY,"  + RECIPEINGREDIENTS_RECIPEID + " INTEGER,"
+                + RECIPEINGREDIENTS_FOODID + " INTEGER,"+ RECIPEINGREDIENTS_COLUMN_QUANTITY+ " DOUBLE)";
+        db.execSQL(CREATE_RECIPEINGREDIENTS_TABLE);
 
         //create Table settings
+        String CREATE_SETTINGS_TABLE = "CREATE TABLE " + SETTINGS_NAME + "("
+                + SETTINGS_ID + " INTEGER PRIMARY KEY" + SETTINGS_MAXKCAL + " INTEGER)";
+        db.execSQL(CREATE_SETTINGS_TABLE);
 
         //Insert default units
         insertUnit(db, "g");
