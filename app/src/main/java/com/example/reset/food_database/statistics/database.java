@@ -1,11 +1,11 @@
 
-package com.example.reset.food_database.list_food;
+package com.example.reset.food_database.statistics;
 
 import android.os.Bundle;
 
 
-/**
- * Created by Oliver Gras
+/*
+ * Created by Denis Kerner
  */
 
 
@@ -26,4 +26,3 @@ public class database {
         this.activity = activity;
     }
 }
-

@@ -1,9 +1,13 @@
 package com.example.reset.food_database.objects;
 
+import com.example.reset.food_database.DatabaseHandler;
+import com.example.reset.food_database.add_unit.init;
+
 /**
- * Created by C4RL0zZ0 on 05.02.2018.
+ * Created by Oliver Gras
  */
 
+//class of food to create food objects
 public class Food {
 
     private String name;
@@ -12,6 +16,7 @@ public class Food {
     private Unit unit;
     private int id;
 
+    //constructor
     public Food(String name, int kcal, double quantity, Unit unit, int id) {
         this.name = name;
         this.kcal = kcal;
@@ -20,27 +25,24 @@ public class Food {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    //to String
     @Override
     public String toString() {
+
         return "Food{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                " ,name='" + name + '\'' +
                 ", kcal=" + kcal +
                 ", quantity=" + quantity +
-                ", unit=" + unit +
+                ", unit=" + unit.getId() +
                 '}';
     }
 
+    //constructor
     public Food(){
     }
 
+    //constructor
     public Food(String name, int kcal, double quantity, Unit unit) {
         this.name = name;
         this.kcal = kcal;
@@ -48,6 +50,7 @@ public class Food {
         this.unit = unit;
     }
 
+    //getter & setter
     public String getName() {
         return name;
     }
@@ -78,5 +81,13 @@ public class Food {
 
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

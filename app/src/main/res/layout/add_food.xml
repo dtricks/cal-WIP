@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/addfoodheader"
     android:inputType="text"
-        android:hint="Lebensmittelbezeichnung"
+        android:hint="Foodentry"
     android:layout_margin="20dp"/>
 
     <EditText
@@ -39,8 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/kcal_textfield"
-        android:inputType="number"
-        android:hint="Menge"
+        android:inputType="numberDecimal"
+        android:hint="Quantity"
         android:layout_margin="20dp"/>
 
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:labelFor="@+id/unit_spinner"
         android:gravity="center"
-        android:text="Menge gemessen in (Einheit):"/>
+        android:text="Your Unit for Quantity:"/>
 
 <LinearLayout
     android:id="@+id/unitlayout"
@@ -66,7 +66,7 @@
         android:id="@+id/unit_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="8">
+        android:layout_weight="7">
     </Spinner>
 
     <ImageButton
@@ -74,6 +74,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_input_add"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/editunit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_edit"
         android:layout_weight="1" />
 
     <ImageButton
@@ -92,6 +99,5 @@
         android:layout_below="@+id/unitlayout"
         android:text="Submit Food"
         android:layout_margin="20dp"/>
-
 
 </RelativeLayout>

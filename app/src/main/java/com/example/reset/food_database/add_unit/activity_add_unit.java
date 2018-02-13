@@ -1,3 +1,4 @@
+/*
 package com.example.reset.food_database.add_unit;
 
 import android.content.Intent;
@@ -8,11 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.reset.food_database.BaseActivity;
 import com.example.reset.food_database.DatabaseHandler;
 import com.example.reset.food_database.R;
 import com.example.reset.food_database.add_food.activity_add_food;
 
-public class activity_add_unit extends AppCompatActivity {
+public class activity_add_unit extends BaseActivity {
 
     EditText unit;
     Button submit;
@@ -51,4 +53,4 @@ public class activity_add_unit extends AppCompatActivity {
         });
 
     }
-}
+}*/

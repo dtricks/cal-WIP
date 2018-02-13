@@ -1,14 +1,16 @@
 package com.example.reset.food_database.objects;
 
 /**
- * Created by C4RL0zZ0 on 05.02.2018.
+ * Created by Oliver Gras
  */
 
+//class of unit to create unit objects
 public class Unit {
 
     private String name;
     private int id;
 
+    //getter & setter
     public String getName() {
         return name;
     }
@@ -25,13 +27,20 @@ public class Unit {
         this.id = id;
     }
 
+    //constructor
     public Unit(int id, String name){
         this.id=id;
         this.name=name;
     }
+
+    public Unit(String name){
+        this.name=name;
+    }
+
     public Unit(){
     }
 
+    //to String
     @Override
     public String toString() {
         return "Unit{" +

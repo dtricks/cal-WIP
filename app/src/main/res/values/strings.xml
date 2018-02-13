@@ -2,10 +2,11 @@
     <string name="app_name">Food_Database</string>
     <string name="food_name">Food</string>
     <string name="addtodiary_toptitle">Add Food to Diary</string>
+    <string name="editDiaryEntry_toptitle">Edit Diary Entry</string>
     <string name="portion">Portion</string>
     <string name="amount_name">Amount</string>
     <string name="addtodiary_buttontext">Submit Food to Diary</string>
     <string name="none">none</string>
     <string name="kcal">Kcal</string>
-    <string name="dateHint">Please insert date here</string>
+    <string name="dateHint">dd.mm.yyyy</string>
 </resources>

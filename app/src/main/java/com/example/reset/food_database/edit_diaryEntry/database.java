@@ -1,11 +1,11 @@
 
-package com.example.reset.food_database.list_food;
+package com.example.reset.food_database.edit_diaryEntry;
 
 import android.os.Bundle;
 
 
 /**
- * Created by Oliver Gras
+ * Created by Denis Kerner
  */
 
 

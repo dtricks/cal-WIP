@@ -1,5 +1,5 @@
 
-package com.example.reset.food_database.settings;
+package com.example.reset.food_database.edit_diaryEntry;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import com.example.reset.food_database.BaseActivity;
 
 
 /**
- * Created by Annabella Peekhaus
+ * Created by Denis Kerner
  */
 
 //manages the classes within the package
@@ -17,7 +17,7 @@ public class init extends BaseActivity {
     private logic applicationLogic;
     private database data;
     private onClickListener eventListener;
-    private gui gui;
+    private com.example.reset.food_database.edit_diaryEntry.gui gui;
 
     private void initApplicationLogic(Activity activity) {
         applicationLogic = new logic(activity, data, gui);
@@ -42,9 +42,8 @@ public class init extends BaseActivity {
         initGUI();
         initApplicationLogic(this);
         initEventToListenerMapping(this);
+
     }
-
-
 
 
 }

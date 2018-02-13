@@ -8,16 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".list_food.list_food">
+        android:theme="@style/Theme.AppCompat.Light">
+        <activity android:name=".list_food.init" />
+        <activity android:name=".add_food.init" />
+        <activity android:name=".add_unit.init" />
+        <activity android:name=".edit_unit.init" />
+        <activity android:name=".edit_food.init" />
+        <activity android:name=".list_recipes.activity_list_recipes" />
+        <activity android:name=".foodlist_recipe.init" />
+        <activity android:name=".addtodiary.init" />
+        <activity android:name=".settings.init" />
+        <activity android:name=".statistics.init" />
+        <activity android:name=".edit_diaryEntry.init" />
+        <activity android:name=".diary.init">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".add_food.activity_add_food" />
-        <activity android:name=".add_unit.activity_add_unit"></activity>
+
     </application>
 
 </manifest>

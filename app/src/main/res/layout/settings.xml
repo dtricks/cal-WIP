@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:id="@+id/settingslayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/settingsdescription"
+        android:layout_below="@+id/settingslayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Please fill in Your daily KCAL goal:"/>
+
+    <EditText
+        android:id="@+id/kcalmax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settingsdescription"
+        android:inputType="number"
+        android:layout_margin="20dp"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/submitSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/kcalmax"
+        android:text="Submit Settings"/>
+
+
+</RelativeLayout>
