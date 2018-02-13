@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<TextView
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:gravity="center"
+    android:id="@+id/editunitheader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Edit Unit"
+    android:layout_marginTop="5dp"/>
+
+
+<EditText
+    android:id="@+id/unit_edit_textfield"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/editunitheader"
+    android:inputType="text"
+    android:hint="unit"
+    android:layout_margin="20dp"/>
+
+<Button
+    android:id="@+id/submitEditUnitbutton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/unit_edit_textfield"
+    android:text="Submit edit Unit"
+    android:layout_margin="20dp"/>
+
+</RelativeLayout>

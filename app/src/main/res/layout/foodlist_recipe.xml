@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.reset.food_database.list_food.list_food">
+
+    <TextView
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:id="@+id/addtofoodlist_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Food to Recipe"
+        android:layout_marginTop="5dp"/>
+
+    <SearchView
+        android:id="@+id/foodfilter_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/foodlist_recipe" />
+
+
+</LinearLayout>

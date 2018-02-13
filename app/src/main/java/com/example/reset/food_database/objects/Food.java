@@ -1,30 +1,27 @@
 package com.example.reset.food_database.objects;
 
+import com.example.reset.food_database.DatabaseHandler;
+import com.example.reset.food_database.add_unit.init;
+
 /**
- * Created by C4RL0zZ0 on 05.02.2018.
+ * Created by Oliver Gras
  */
 
+//class of food to create food objects
 public class Food {
 
     private String name;
     private int kcal;
     private double quantity;
-    private Unit unit;
+    private String unit;
     private int id;
 
-    public Food(String name, int kcal, double quantity, Unit unit, int id) {
+    //constructor
+    public Food(String name, int kcal, double quantity, String unit, int id) {
         this.name = name;
         this.kcal = kcal;
         this.quantity = quantity;
         this.unit = unit;
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
         this.id = id;
     }
 
@@ -34,20 +31,24 @@ public class Food {
                 "name='" + name + '\'' +
                 ", kcal=" + kcal +
                 ", quantity=" + quantity +
-                ", unit=" + unit +
+                ", unit='" + unit + '\'' +
+                ", id=" + id +
                 '}';
     }
 
+    //constructor
     public Food(){
     }
 
-    public Food(String name, int kcal, double quantity, Unit unit) {
+    //constructor
+    public Food(String name, int kcal, double quantity, String unit) {
         this.name = name;
         this.kcal = kcal;
         this.quantity = quantity;
         this.unit = unit;
     }
 
+    //getter & setter
     public String getName() {
         return name;
     }
@@ -72,11 +73,19 @@ public class Food {
         this.quantity = quantity;
     }
 
-    public Unit getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

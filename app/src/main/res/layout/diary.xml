@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context="com.example.reset.food_database.list_food.list_food">
 
+    <TextView
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:id="@+id/mydiary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Diary"
+        android:layout_marginTop="5dp"/>
+
     <SearchView
         android:id="@+id/foodfilter"
         android:layout_width="match_parent"

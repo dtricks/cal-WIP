@@ -1,22 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
- <!--   <item
-        android:id="@+id/createuser"
-        android:icon="@drawable/ic_action_add_person"
-        android:showAsAction="always"
-        android:title="Create user"/>
     <item
-        android:id="@+id/login"
-        android:icon="@drawable/right_answer"
-        android:showAsAction="always"
-        android:title="Login"/>
+        android:id="@+id/diary"
+        app:showAsAction="always"
+        android:title="my Diary"/>
     <item
-        android:id="@+id/deleteuser"
-        android:icon="@drawable/ic_action_discard"
-        android:showAsAction="always"
-        android:title="Delete user"
-        />-->
+        android:id="@+id/myfood"
+        app:showAsAction="always"
+        android:title="My Food"/>
+    <item
+        android:id="@+id/myrecipes"
+        app:showAsAction="always"
+        android:title="MY Recipes"
+        />
+
+  <item
+     android:id="@+id/mymaxkcal"
+     android:icon="@drawable/if_settings_2561383"
+     app:showAsAction="always"
+     android:title="Settings"
+     />
 
 </menu>
